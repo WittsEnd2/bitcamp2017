@@ -65,6 +65,7 @@ public class LoginActivity extends Activity  {
         userName = (EditText)findViewById(R.id.usr);
         password = (EditText)findViewById(R.id.psd);
 
+        //Enables looking for authentication
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
@@ -132,7 +133,7 @@ public class LoginActivity extends Activity  {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                        
+
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
