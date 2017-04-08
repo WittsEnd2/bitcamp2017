@@ -9,7 +9,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout">
 
     </android.support.design.widget.AppBarLayout>
 
@@ -30,5 +31,38 @@
         android:text="Submit"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="bottom|center_horizontal" />
+
+    <EditText
+        android:id="@+id/projectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/submitProject"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginTop="58dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/projectDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/projectName"
+        android:layout_below="@+id/projectName"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/numPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/projectDescription"
+        android:layout_below="@+id/projectDescription"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:hint="People on project"
+        android:inputType="number" />
 
 </RelativeLayout>

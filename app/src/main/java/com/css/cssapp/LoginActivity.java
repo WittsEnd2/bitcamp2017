@@ -61,7 +61,7 @@ public class LoginActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginButton = (Button)findViewById(R.id.btn);
+        loginButton = (Button)findViewById(R.id.login_button);
         userName = (EditText)findViewById(R.id.usr);
         password = (EditText)findViewById(R.id.psd);
 
