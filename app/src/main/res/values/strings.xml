@@ -14,4 +14,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_project_form">projectForm</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_dashboard_user">DashboardUser</string>
+    <string name="title_activity_dashboard_leader">DashboardLeader</string>
+    <string name="title_activity_chat_screen">ChatScreen</string>
 </resources>
