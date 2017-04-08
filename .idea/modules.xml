@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CSSAndroid.iml" filepath="$PROJECT_DIR$/CSSAndroid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CSSApp.iml" filepath="$PROJECT_DIR$/CSSApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CSSApp.iml" filepath="$PROJECT_DIR$/CSSApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bitcamp2017.iml" filepath="$PROJECT_DIR$/bitcamp2017.iml" />
     </modules>
