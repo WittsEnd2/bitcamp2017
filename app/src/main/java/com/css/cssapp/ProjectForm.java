@@ -62,9 +62,9 @@ public class ProjectForm extends AppCompatActivity {
         submitProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
-                projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
-            }
+                if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
+                    projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
+                }
             }
         });
     }
