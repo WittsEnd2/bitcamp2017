@@ -70,12 +70,12 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
         android:scaleType="centerCrop"
         android:src="@drawable/logo"
         app:srcCompat="@drawable/logo"
         android:layout_above="@+id/psd"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp" />
-
-
+    
 </RelativeLayout>

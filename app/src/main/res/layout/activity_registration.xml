@@ -80,8 +80,7 @@
         android:layout_below="@+id/registerPassword"
         android:layout_marginTop="30dp"
         android:checked="false"
-        android:text="Switch"
-        tools:text="creator" />
+        android:text="creator" />
 
     <TextView
         android:id="@+id/textView4"
