@@ -113,7 +113,7 @@ public class LoginActivity extends Activity {
                                     Toast.LENGTH_SHORT).show();
 
                         } else {
-                            Intent projectCreation = new Intent(LoginActivity.this, ProjectForm.class);
+                            Intent projectCreation = new Intent(LoginActivity.this, DashboardUser.class);
                             startActivity(projectCreation);
                         }
 

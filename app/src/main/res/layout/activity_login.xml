@@ -19,15 +19,30 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bitell"
         android:layout_alignParentTop="true"
+<<<<<<< HEAD
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp" />
+=======
         android:clickable="false"
         android:layout_centerHorizontal="true" />
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
 
     <EditText
+        android:id="@+id/psd"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/usr"
+        android:layout_marginTop="16dp"
+        android:editable="true"
         android:ems="10"
         android:hint="Password"
+<<<<<<< HEAD
+        android:inputType="textPassword"
+        android:textAlignment="center" />
+=======
         android:id="@+id/psd"
         android:textAlignment="viewStart"
         android:editable="true"
@@ -36,20 +51,33 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="16dp"
         android:layout_alignParentEnd="true" />
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
 
     <EditText
         android:id="@+id/usr"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+=======
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
         android:editable="true"
         android:ems="10"
         android:hint="User Name"
         android:inputType="textPersonName"
+<<<<<<< HEAD
+        android:textAlignment="center" />
+=======
         android:textAlignment="viewStart"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
 
 
     <Button
@@ -63,5 +91,19 @@
         android:text="LOGIN"
         android:visibility="visible" />
 
+<<<<<<< HEAD
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo"
+        app:srcCompat="@drawable/logo"
+        android:layout_above="@+id/psd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp" />
+=======
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
 
 </RelativeLayout>
