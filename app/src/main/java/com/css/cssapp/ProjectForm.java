@@ -82,6 +82,9 @@ public class ProjectForm extends AppCompatActivity {
                 Toast.makeText(ProjectForm.this, "Project not created!",
                         Toast.LENGTH_SHORT).show();
             }
+                if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
+                    projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
+                }
             }
         });
     }

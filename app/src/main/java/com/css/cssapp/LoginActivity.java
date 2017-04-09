@@ -24,10 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import static com.google.android.gms.internal.zzs.TAG;
 
 
-public class LoginActivity extends Activity  {
+public class LoginActivity extends Activity {
     Button loginButton;
     EditText userName, password;
     private FirebaseAuth mAuth;
@@ -37,33 +38,14 @@ public class LoginActivity extends Activity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Write a message to the database
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("message");
-//
-//        myRef.setValue("Hello, World!");
-//        // Read from the database
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d(TAG, "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         loginButton = (Button)findViewById(R.id.login_button);
         userName = (EditText)findViewById(R.id.usr);
         password = (EditText)findViewById(R.id.psd);
+
 
         //Enables looking for authentication
         mAuth = FirebaseAuth.getInstance();
@@ -93,12 +75,11 @@ public class LoginActivity extends Activity  {
             public void onClick(View v) {
                 String convertedUsername = userName.getText().toString();
                 String convertedPassword = password.getText().toString();
+                Toast.makeText(LoginActivity.this, convertedUsername, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, convertedPassword, Toast.LENGTH_SHORT).show();
                 signIn(convertedUsername, convertedPassword);
             }
         });
-
-
-
     }
 
     @Override
@@ -118,16 +99,12 @@ public class LoginActivity extends Activity  {
     }
     // [END on_stop_remove_listener]
 
-    private void signIn(String email, String password) {
-        Log.d(TAG, "signIn:" + email);
-
-        // [START sign_in_with_email]
+    public void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
@@ -136,10 +113,15 @@ public class LoginActivity extends Activity  {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(LoginActivity.this, "Login Failed",
                                     Toast.LENGTH_SHORT).show();
+
                         } else {
                             Intent projectCreation = new Intent(LoginActivity.this, ProjectForm.class);
                             startActivity(projectCreation);
+                            Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(myIntent);
                         }
+
+                        // ...
                     }
                 });
         // [END sign_in_with_email]

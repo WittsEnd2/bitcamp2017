@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="com.css.cssapp.RegistrationActivity">
 
     <EditText
@@ -18,28 +19,30 @@
         android:ems="10"
         android:id="@+id/registerUserName"
         android:layout_below="@+id/registerLastName"
-        android:layout_alignParentStart="true" />
+        android:layout_alignStart="@+id/registerLastName"
+        android:layout_marginTop="27dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Last Name"
-        android:ems="10"
         android:id="@+id/registerLastName"
-        android:layout_below="@+id/registerFirstName"
-        android:layout_alignParentStart="true" />
-
-    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="First Name"
+        android:layout_below="@+id/registerFirstName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
         android:ems="10"
-        android:layout_marginTop="31dp"
+        android:hint="Experience?"
+        android:inputType="textPersonName" />
+
+    <EditText
         android:id="@+id/registerFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/registerLastName"
         android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="31dp"
+        android:ems="10"
+        android:hint="Full Name"
+        android:inputType="textPersonName" />
 
     <TextView
         android:text="Register for an Account"
@@ -58,16 +61,37 @@
         android:ems="10"
         android:id="@+id/registerPassword"
         android:layout_below="@+id/registerUserName"
-        android:layout_alignParentStart="true" />
+        android:layout_alignStart="@+id/registerUserName"
+        android:layout_marginTop="17dp" />
 
     <Button
         android:text="REGISTER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
         android:id="@+id/register"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/registerPassword"
         android:layout_below="@+id/registerPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="30dp"
+        android:checked="false"
+        android:text="Switch"
+        tools:text="creator" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Collaborator"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:visibility="visible"
+        android:layout_alignBaseline="@+id/switch1"
+        android:layout_alignBottom="@+id/switch1"
+        android:layout_toEndOf="@+id/switch1" />
 
 </RelativeLayout>
