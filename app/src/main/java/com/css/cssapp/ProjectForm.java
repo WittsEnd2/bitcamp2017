@@ -22,14 +22,16 @@ import static com.google.android.gms.internal.zzs.TAG;
 
 
 public class ProjectForm extends AppCompatActivity {
-    EditText projectName, projectDescription, numPeople;
+    EditText projectName, projectDescription, numPeople, projectLeader;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
 
+    // Strings or ints that are converted from the EditText values
     String projectNameConverted;
     String projectDescriptionConverted;
     int numPeopleConverted;
+    String projectLeaderConverted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class ProjectForm extends AppCompatActivity {
         projectName = (EditText) findViewById(R.id.projectName);
         projectDescription = (EditText) findViewById(R.id.projectDescription);
         numPeople = (EditText) findViewById(R.id.numPeople);
+        projectLeader = (EditText) findViewById(R.id.projectLeader);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -67,13 +70,17 @@ public class ProjectForm extends AppCompatActivity {
             public void onClick(View view) {
                 projectNameConverted = projectName.getText().toString();
                 projectDescriptionConverted = projectDescription.getText().toString();
+                projectLeaderConverted = projectLeader.getText().toString();
                 if (numPeople.getText().toString().equals("")) {
                     numPeopleConverted = 0;
                 } else {
                     numPeopleConverted = Integer.parseInt(numPeople.getText().toString());
                 }
-                if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
-                projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
+                if (projectName.length() > 0 && projectDescription.length() > 0
+                        && numPeopleConverted > 0 && projectLeader.length() > 0) {
+                projectToDatabase(projectNameConverted, projectDescriptionConverted,
+
+                        numPeopleConverted, projectLeaderConverted);
                 Toast.makeText(ProjectForm.this, "Project created!",
                         Toast.LENGTH_SHORT).show();
                     Intent dashboard = new Intent(ProjectForm.this, DashboardLeader.class);
@@ -82,13 +89,11 @@ public class ProjectForm extends AppCompatActivity {
                 Toast.makeText(ProjectForm.this, "Project not created!",
                         Toast.LENGTH_SHORT).show();
             }
-                if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
-                    projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
-                }
             }
         });
     }
-    protected void projectToDatabase(String name, String description, int numPeople) {
+    protected void projectToDatabase(String name, String description, int numPeople,
+                                     String projectLeader) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("projects");
 
@@ -96,5 +101,6 @@ public class ProjectForm extends AppCompatActivity {
         myRef.child("name").setValue(name);
         myRef.child("description").setValue(description);
         myRef.child("numPeople").setValue(numPeople);
+        myRef.child("projectLeader").setValue(projectLeader);
     }
 }

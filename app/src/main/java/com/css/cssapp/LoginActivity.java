@@ -75,8 +75,6 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
                 String convertedUsername = userName.getText().toString();
                 String convertedPassword = password.getText().toString();
-                Toast.makeText(LoginActivity.this, convertedUsername, Toast.LENGTH_SHORT).show();
-                Toast.makeText(LoginActivity.this, convertedPassword, Toast.LENGTH_SHORT).show();
                 signIn(convertedUsername, convertedPassword);
             }
         });

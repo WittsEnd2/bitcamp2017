@@ -4,34 +4,34 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background"
     tools:context="com.css.cssapp.MainActivity">
 
     <Button
-        android:text="LOGIN"
+        android:id="@+id/menuLoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/menuLoginButton"
-        android:background="@android:color/holo_blue_dark"
-        android:layout_marginTop="126dp"
-        android:layout_below="@+id/BITELL"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/BITELL"
+        android:layout_marginTop="126dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="LOGIN" />
 
     <Button
-        android:text="REGISTER"
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/registerButton"
-        android:background="@android:color/holo_blue_dark"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/menuLoginButton"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/menuLoginButton"
+        android:layout_marginTop="35dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="REGISTER" />
 
     <TextView
         android:id="@+id/BITELL"
