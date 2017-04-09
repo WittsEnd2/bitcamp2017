@@ -53,6 +53,7 @@ public class DashboardUser extends AppCompatActivity {
             }
         };
 
+
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
