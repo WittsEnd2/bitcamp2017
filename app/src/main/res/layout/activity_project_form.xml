@@ -40,8 +40,8 @@
         android:layout_below="@+id/appBarLayout"
         android:layout_marginTop="58dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/projectDescription"
@@ -58,11 +58,11 @@
         android:id="@+id/numPeople"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/projectDescription"
-        android:layout_below="@+id/projectDescription"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="27dp"
         android:ems="10"
         android:hint="People on project"
-        android:inputType="number" />
+        android:inputType="number"
+        android:layout_below="@+id/projectDescription"
+        android:layout_alignStart="@+id/projectDescription" />
 
 </RelativeLayout>

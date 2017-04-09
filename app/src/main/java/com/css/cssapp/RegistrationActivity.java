@@ -15,6 +15,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 import static com.google.android.gms.internal.zzs.TAG;
 
@@ -23,6 +30,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText firstName, lastName, userName, password;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    boolean canRegister = true;
 
 
     @Override
@@ -53,17 +61,53 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         };
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("usernames");
+        myRef.child("usernames").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean exists = false;
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Map<String, Object> model = (Map<String, Object>) child.getValue();
+
+                    if(model.get("username").equals("SET_YOUR_NEW_USER_NAME_HERE")) {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if(exists) {
+                    Toast.makeText(getApplicationContext(),
+                            "Username already exists.", Toast.LENGTH_LONG).show();
+                    canRegister = false;
+                }
+                else {
+                    // This user doesn't exists in firebase.
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (firstName.length() > 0 && lastName.length() > 0
-                        && userName.length() > 4 && password.length() > 7) {
+                        && userName.length() > 4 && password.length() > 7 && canRegister == true) {
                     Toast.makeText(getApplicationContext(),
                             "Registration Successful!", Toast.LENGTH_LONG).show();
                     Intent myIntent = new Intent(RegistrationActivity.this, MainActivity.class);
                     startActivity(myIntent);
                     String convertedUsername = userName.getText().toString();
                     String convertedPassword = password.getText().toString();
+
+                    // Adds the username to the "username" branch of the database
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("usernames");
+                    myRef.child("usernames").setValue(convertedUsername);
 
                     createAccount(convertedUsername, convertedPassword);
 
@@ -74,10 +118,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if(userName.length()<5)
                     Toast.makeText(getApplicationContext(),
-                            "Username contain more than 4 characters.", Toast.LENGTH_LONG).show();
-                if(userName.length()<5)
+                            "Username should contain more than 4 characters.", Toast.LENGTH_LONG).show();
+                if(password.length()<8)
                     Toast.makeText(getApplicationContext(),
-                            "Password contain more than 7 characters.", Toast.LENGTH_LONG).show();
+                            "Password should contain more than 7 characters.", Toast.LENGTH_LONG).show();
             }
         });
     }

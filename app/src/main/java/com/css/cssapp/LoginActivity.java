@@ -87,19 +87,13 @@ public class LoginActivity extends Activity  {
 
         };
 
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(userName.getText().toString().equals("admin") &&
-                        password.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(),
-                            "Login Successful!",Toast.LENGTH_LONG).show();
-                    Intent myIntent = new Intent(LoginActivity.this, WAHF.class);
-                    startActivity(myIntent);
-                }else{
-                    Toast.makeText(getApplicationContext(),
-                            "Login unsuccessful. Try again.",Toast.LENGTH_LONG).show();
-                }
+                String convertedUsername = userName.getText().toString();
+                String convertedPassword = password.getText().toString();
+                signIn(convertedUsername, convertedPassword);
             }
         });
 
@@ -142,6 +136,9 @@ public class LoginActivity extends Activity  {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(LoginActivity.this, "Login Failed",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent projectCreation = new Intent(LoginActivity.this, ProjectForm.class);
+                            startActivity(projectCreation);
                         }
                     }
                 });

@@ -1,5 +1,6 @@
 package com.css.cssapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,6 +26,11 @@ public class ProjectForm extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+
+    String projectNameConverted;
+    String projectDescriptionConverted;
+    int numPeopleConverted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +39,6 @@ public class ProjectForm extends AppCompatActivity {
         projectName = (EditText) findViewById(R.id.projectName);
         projectDescription = (EditText) findViewById(R.id.projectDescription);
         numPeople = (EditText) findViewById(R.id.numPeople);
-
-        final String projectNameConverted = projectName.getText().toString();
-        final String projectDescriptionConverted = projectDescription.getText().toString();
-        final int numPeopleConverted = Integer.parseInt(numPeople.getText().toString());
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -62,8 +65,22 @@ public class ProjectForm extends AppCompatActivity {
         submitProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
+                projectNameConverted = projectName.getText().toString();
+                projectDescriptionConverted = projectDescription.getText().toString();
+                if (numPeople.getText().toString().equals("")) {
+                    numPeopleConverted = 0;
+                } else {
+                    numPeopleConverted = Integer.parseInt(numPeople.getText().toString());
+                }
+                if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
                 projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
+                Toast.makeText(ProjectForm.this, "Project created!",
+                        Toast.LENGTH_SHORT).show();
+                    Intent dashboard = new Intent(ProjectForm.this, DashboardLeader.class);
+                    startActivity(dashboard);
+            } else {
+                Toast.makeText(ProjectForm.this, "Project not created!",
+                        Toast.LENGTH_SHORT).show();
             }
             }
         });
