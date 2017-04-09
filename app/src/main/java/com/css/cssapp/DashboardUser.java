@@ -16,6 +16,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import static com.google.android.gms.internal.zzs.TAG;
 
@@ -31,7 +32,7 @@ public class DashboardUser extends AppCompatActivity {
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("projects");
+        DatabaseReference myRef = database.getReference();
 
 
         myRef.addValueEventListener(new ValueEventListener() {

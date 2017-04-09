@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.google.android.gms.internal.zzs.TAG;
 
 
@@ -30,6 +33,7 @@ public class ProjectForm extends AppCompatActivity {
     String projectNameConverted;
     String projectDescriptionConverted;
     int numPeopleConverted;
+    String userConverted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +49,11 @@ public class ProjectForm extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    userConverted = user.getUid();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -56,6 +61,7 @@ public class ProjectForm extends AppCompatActivity {
                 // ...
             }
         };
+
 
         setSupportActionBar(toolbar);
 
@@ -73,7 +79,6 @@ public class ProjectForm extends AppCompatActivity {
                     numPeopleConverted = Integer.parseInt(numPeople.getText().toString());
                 }
                 if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
-                projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
                 Toast.makeText(ProjectForm.this, "Project created!",
                         Toast.LENGTH_SHORT).show();
                     Intent dashboard = new Intent(ProjectForm.this, DashboardLeader.class);
@@ -82,19 +87,31 @@ public class ProjectForm extends AppCompatActivity {
                 Toast.makeText(ProjectForm.this, "Project not created!",
                         Toast.LENGTH_SHORT).show();
             }
+
+
                 if (projectName.length() > 0 && projectDescription.length() > 0 && numPeopleConverted > 0) {
-                    projectToDatabase(projectNameConverted, projectDescriptionConverted, numPeopleConverted);
+                    projectToDatabase(projectNameConverted, projectDescriptionConverted, userConverted, numPeopleConverted);
                 }
             }
         });
     }
-    protected void projectToDatabase(String name, String description, int numPeople) {
+    protected void projectToDatabase(String name, String description, String uid, int numPeople) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("projects");
+        DatabaseReference myRef = database.getReference();
 
-        myRef.child("user").setValue(user);
-        myRef.child("name").setValue(name);
-        myRef.child("description").setValue(description);
-        myRef.child("numPeople").setValue(numPeople);
+        String key = myRef.child("projects").push().getKey();
+        Projects projects = new Projects(uid, name, description, numPeople);
+        Map<String, Object> projectValues = projects.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/projects/" + key, projectValues);
+
+        myRef.updateChildren(childUpdates);
+
+
+//        myRef.child("user").setValue(user);
+//        myRef.child("name").setValue(name);
+//        myRef.child("description").setValue(description);
+//        myRef.child("numPeople").setValue(numPeople);
     }
 }
