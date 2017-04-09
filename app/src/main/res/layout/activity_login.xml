@@ -72,6 +72,7 @@
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="false"
+        android:scaleType="center"
         android:visibility="visible"
         app:srcCompat="@drawable/logo" />
 </RelativeLayout>
