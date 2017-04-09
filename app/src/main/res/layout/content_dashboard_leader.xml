@@ -8,4 +8,11 @@
     tools:context="com.css.cssapp.DashboardLeader"
     tools:showIn="@layout/activity_dashboard_leader">
 
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
