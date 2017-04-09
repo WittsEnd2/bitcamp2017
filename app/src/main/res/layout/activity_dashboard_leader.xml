@@ -61,7 +61,7 @@
         android:layout_height="102dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/logo"
-        android:backgroundTint="@android:color/holo_blue_bright"
+        android:backgroundTint="?android:attr/textColorSecondaryNoDisable"
         android:clickable="true"
         android:elevation="40dp"
         android:scaleType="fitXY"

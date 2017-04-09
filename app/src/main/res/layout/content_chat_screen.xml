@@ -49,7 +49,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/appBarLayout4"
         android:background="@drawable/speach"
-        android:backgroundTint="@android:color/holo_blue_bright"
+        android:backgroundTint="?android:attr/textColorSecondaryNoDisable"
         android:clickable="true"
         android:elevation="40dp"
         android:scaleType="fitXY"
