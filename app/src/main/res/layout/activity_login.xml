@@ -13,12 +13,11 @@
 
     tools:context="com.css.cssapp.LoginActivity">
 
-    <TextView
-        android:id="@+id/title"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BITELL"
-        android:textSize="36sp"
+        app:srcCompat="@drawable/bitell"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -56,30 +55,12 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_dark"
-        android:text="LOGIN"
-        android:visibility="visible"
-        android:layout_marginTop="69dp"
         android:layout_alignTop="@+id/psd"
-        android:layout_centerHorizontal="true" />
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:cropToPadding="true"
-        android:elevation="7dp"
-        android:scaleType="center"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/logo"
-        android:visibility="visible"
-        app:srcCompat="@drawable/logo"
-        android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp" />
+        android:layout_marginTop="69dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:text="LOGIN"
+        android:visibility="visible" />
 
 
 </RelativeLayout>
