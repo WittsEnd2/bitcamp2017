@@ -14,7 +14,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout4">
 
     </android.support.design.widget.AppBarLayout>
 
@@ -42,4 +43,38 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
-    </RelativeLayout>
+    <Button
+        android:id="@+id/logobutton"
+        android:layout_width="98dp"
+        android:layout_height="102dp"
+        android:background="@drawable/logo"
+        android:backgroundTint="@android:color/black"
+        android:clickable="true"
+        android:elevation="40dp"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:id="@+id/speechbutton"
+        android:layout_width="98dp"
+        android:layout_height="102dp"
+        android:background="@drawable/speach"
+        android:backgroundTint="@android:color/black"
+        android:clickable="true"
+        android:elevation="40dp"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        android:layout_below="@+id/appBarLayout4"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/bitell"
+        android:layout_above="@+id/check"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="316dp" />
+
+</RelativeLayout>
