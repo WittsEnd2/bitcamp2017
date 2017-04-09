@@ -117,8 +117,6 @@ public class LoginActivity extends Activity {
                         } else {
                             Intent projectCreation = new Intent(LoginActivity.this, ProjectForm.class);
                             startActivity(projectCreation);
-                            Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(myIntent);
                         }
 
                         // ...
