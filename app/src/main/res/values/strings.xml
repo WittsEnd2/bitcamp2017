@@ -19,4 +19,5 @@
     <string name="title_activity_dashboard_user">DashboardUser</string>
     <string name="title_activity_dashboard_leader">DashboardLeader</string>
     <string name="title_activity_chat_screen">ChatScreen</string>
+    <string name="title_activity_dashboard_leader_second">DashboardLeaderSecond</string>
 </resources>

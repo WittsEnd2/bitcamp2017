@@ -43,6 +43,10 @@
         <activity
             android:name=".ChatScreen"
             android:label="@string/title_activity_chat_screen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DashboardLeaderSecond"
+            android:label="@string/title_activity_dashboard_leader_second"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

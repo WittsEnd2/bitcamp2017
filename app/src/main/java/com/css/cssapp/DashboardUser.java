@@ -20,6 +20,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import static com.google.android.gms.internal.zzs.TAG;
 
@@ -28,6 +29,10 @@ public class DashboardUser extends AppCompatActivity {
     ArrayList<Projects> projectList = new ArrayList<Projects>();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+<<<<<<< HEAD
+=======
+    private FirebaseUser user;
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +45,11 @@ public class DashboardUser extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+<<<<<<< HEAD
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+=======
+                user = firebaseAuth.getCurrentUser();
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -48,12 +57,19 @@ public class DashboardUser extends AppCompatActivity {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
+<<<<<<< HEAD
                 // [START_EXCLUDE]
             }
         };
+=======
+                // ...
+            }
+        };
+
+>>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("projects");
+        DatabaseReference myRef = database.getReference();
 
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -84,9 +100,22 @@ public class DashboardUser extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
 
 }
