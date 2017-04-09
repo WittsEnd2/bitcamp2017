@@ -27,9 +27,7 @@ public class DashboardLeader extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-<<<<<<< HEAD
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-=======
         speechButton = (Button)findViewById(R.id.speechbutton);
 
 
@@ -41,7 +39,6 @@ public class DashboardLeader extends AppCompatActivity {
             }
         });
 
->>>>>>> bf1a955cab35e72e34ed65d5709f25035126e8df
     }
 
 }
