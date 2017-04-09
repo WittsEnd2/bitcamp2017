@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,36 +16,55 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.google.android.gms.internal.zzs.TAG;
 
 public class RegistrationActivity extends AppCompatActivity {
     Button registerButton;
-    EditText firstName, lastName, userName, password;
+    EditText fullName, skills, userName, password;
+    Switch type;
+    String userID;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase database;
     boolean canRegister = true;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+    // [END on_start_add_listener]
+
+    // [START on_stop_remove_listener]
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        firstName = (EditText)findViewById(R.id.registerFirstName);
-        lastName = (EditText)findViewById(R.id.registerLastName);
+        fullName = (EditText)findViewById(R.id.registerFullName);
+        skills = (EditText)findViewById(R.id.registerSkills);
         userName = (EditText)findViewById(R.id.registerUserName);
         password = (EditText)findViewById(R.id.registerPassword);
+        type = (Switch) findViewById(R.id.switch1);
         registerButton = (Button)findViewById(R.id.register);
 
         mAuth = FirebaseAuth.getInstance();
+
+        // [END on_stop_remove_listener]
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -52,6 +72,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+                    userID = new String(user.getUid());
+                    Toast.makeText(getApplicationContext(),
+                            "User ID: " + userID, Toast.LENGTH_LONG).show();
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -61,55 +84,34 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         };
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("usernames");
-        myRef.child("usernames").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean exists = false;
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Map<String, Object> model = (Map<String, Object>) child.getValue();
 
-                    if(model.get("username").equals("SET_YOUR_NEW_USER_NAME_HERE")) {
-                        exists = true;
-                        break;
-                    }
-                }
-
-                if(exists) {
-                    Toast.makeText(getApplicationContext(),
-                            "Username already exists.", Toast.LENGTH_LONG).show();
-                    canRegister = false;
-                }
-                else {
-                    // This user doesn't exists in firebase.
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (firstName.length() > 0 && lastName.length() > 0
+                if (fullName.length() > 0 && skills.length() > 0
                         && userName.length() > 4 && password.length() > 7 && canRegister == true) {
                     Toast.makeText(getApplicationContext(),
                             "Registration Successful!", Toast.LENGTH_LONG).show();
-                    Intent myIntent = new Intent(RegistrationActivity.this, MainActivity.class);
-                    startActivity(myIntent);
+                    //Intent myIntent = new Intent(RegistrationActivity.this, ProjectForm.class);
+                    //startActivity(myIntent);
                     String convertedUsername = userName.getText().toString();
                     String convertedPassword = password.getText().toString();
 
-                    // Adds the username to the "username" branch of the database
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("usernames");
-                    myRef.child("usernames").setValue(convertedUsername);
+                    String convertedSkills = skills.getText().toString();
+                    String convertedType;
+                    if (type.isChecked()) {
+                        convertedType = "Creator";
+                    } else {
+                        convertedType = "Collaborator";
+                    }
+                    
+                    writeNewUser(userID, convertedSkills, "Default", convertedType);
 
                     createAccount(convertedUsername, convertedPassword);
+
+                    Intent myIntent = new Intent(RegistrationActivity.this, ProjectForm.class);
+                    startActivity(myIntent);
 
                 } else {
                     Toast.makeText(getApplicationContext(),
@@ -145,5 +147,21 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 });
         // [END create_user_with_email]
+
+
+    }
+
+    private void writeNewUser(String userID, String skills, String bio, String type) {
+
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabase = database.getReference();
+        String key = mDatabase.child("users").push().getKey();
+        User user = new User(key, skills, bio, type);
+        Map<String, Object> userValues = user.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/users/" + key, userValues);
+
+        mDatabase.updateChildren(childUpdates);
     }
 }

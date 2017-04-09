@@ -10,8 +10,14 @@ public class Projects {
     private String projectDescription;
     private int projectId;
     private int numPeople;
-    public Projects() {
 
+    public Projects(String projectName, String projectDescription, int projectId,
+                    String projectLeader, int numPeople) {
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+        this.projectId = projectId;
+        this.projectLeader = projectLeader;
+        this.numPeople = numPeople;
     }
 
     public String getProjectLeader() {

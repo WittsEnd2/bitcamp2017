@@ -83,8 +83,8 @@ public class ProjectForm extends AppCompatActivity {
                         numPeopleConverted, projectLeaderConverted);
                 Toast.makeText(ProjectForm.this, "Project created!",
                         Toast.LENGTH_SHORT).show();
-                    Intent dashboard = new Intent(ProjectForm.this, DashboardLeader.class);
-                    startActivity(dashboard);
+                    //Intent dashboard = new Intent(ProjectForm.this, DashboardLeader.class);
+                    //startActivity(dashboard);
             } else {
                 Toast.makeText(ProjectForm.this, "Project not created!",
                         Toast.LENGTH_SHORT).show();
