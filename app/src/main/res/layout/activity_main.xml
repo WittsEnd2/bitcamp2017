@@ -12,70 +12,52 @@
     tools:context="com.css.cssapp.MainActivity">
 
     <Button
-        android:id="@+id/menuLoginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_alignParentEnd="true"
-=======
-        android:background="@android:drawable/screen_background_light_transparent"
-        android:elevation="12dp"
-        android:text="LOGIN"
-        android:layout_marginBottom="42dp"
-        android:layout_above="@+id/registerButton"
->>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/BITELL"
-        android:layout_marginTop="126dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="LOGIN" />
-
-    <Button
-<<<<<<< HEAD
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/menuLoginButton"
-        android:layout_marginTop="35dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="REGISTER" />
-=======
-        android:id="@+id/logobutton"
-        android:layout_width="98dp"
-        android:layout_height="102dp"
-        android:background="@drawable/logo"
-        android:backgroundTint="@android:drawable/screen_background_dark_transparent"
-        android:clickable="false"
-        android:elevation="40dp"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:drawable/screen_background_light_transparent"
         android:text="REGISTER"
         android:layout_above="@+id/logobutton"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="51dp"
         android:layout_alignParentEnd="true" />
->>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
 
     <Button
         android:id="@+id/slogan"
         android:layout_width="250dp"
-        android:layout_height="95dp"
+        android:layout_height="115dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/slogan"
         android:clickable="false"
         android:elevation="40dp"
         android:scaleType="fitXY"
+        android:textAlignment="center"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/menuLoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/registerButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/registerButton"
+        android:layout_marginBottom="47dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:text="Login"
+        android:textColor="?attr/actionMenuTextColor" />
+
+    <Button
+        android:id="@+id/logobutton"
+        android:layout_width="98dp"
+        android:layout_height="102dp"
+        android:background="@drawable/logo"
+        android:backgroundTint="?android:attr/textColorSecondaryNoDisable"
+        android:clickable="true"
+        android:elevation="40dp"
+        android:scaleType="fitXY"
         android:visibility="visible"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 

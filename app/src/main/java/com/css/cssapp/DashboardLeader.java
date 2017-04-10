@@ -1,12 +1,12 @@
 package com.css.cssapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -18,11 +18,10 @@ import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
-import android.widget.ViewSwitcher;
+import android.widget.TextView;
+import android.widget.ViewSwitcher.ViewFactory;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,23 +34,17 @@ import android.view.animation.AnimationUtils;
 
 import org.w3c.dom.Text;
 
-<<<<<<< HEAD
-public class DashboardLeader extends AppCompatActivity {
-    Button no,yes;
-    int i =0;
-    ImageSwitcher imageSwitcher;
-    TextSwitcher textSwitcher;
-=======
 import java.util.ArrayList;
-
-import static com.google.android.gms.internal.zzs.TAG;
->>>>>>> ccc0e96ff75e7f82509f729568bcf9ca7cd7c3e2
+import java.util.Iterator;
 
 public class DashboardLeader extends AppCompatActivity {
-    ArrayList<Projects> projectList = new ArrayList<Projects>();
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    FirebaseUser user;
+    Button no, yes;
+    int i = 0;
+    TextSwitcher textSwitcher;
+    String[] skillSet = {"Steven Tra\nVidMe", "Michael Alper\nTibell", "Michael Wittner\nSpaceBook"};
+
+    ArrayList<User> users = new ArrayList<User>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Button speechButton;
@@ -61,92 +54,44 @@ public class DashboardLeader extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-<<<<<<< HEAD
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        speechButton = (Button)findViewById(R.id.speechbutton);
-        no = (Button)findViewById(R.id.cross);
-        yes = (Button)findViewById(R.id.check);
+        speechButton = (Button) findViewById(R.id.speechbutton);
+        no = (Button) findViewById(R.id.cross);
+        yes = (Button) findViewById(R.id.check);
 
-        imageSwitcher = (ImageSwitcher) findViewById(R.id.imageswitcher);
         textSwitcher = (TextSwitcher) findViewById(R.id.textswitcher);
 
-
-        imageSwitcher.setFactory(new ViewSwitcher.ViewFactory(){
-            @Override
-                    public View makeView(){
-                ImageView imageView = new ImageView(getApplicationContext());
-                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                imageView.setLayoutParams(new ImageSwitcher.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
-                return imageView;
-            }
-        });
-
-        textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+        textSwitcher.setFactory(new ViewFactory() {
             @Override
             public View makeView() {
-                ImageView imageView = new ImageView(getApplicationContext());
-                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                imageView.setLayoutParams(new TextSwitcher.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
-                return imageView;
+                TextView textView = new TextView(DashboardLeader.this);
+                textView.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+                textView.setTextSize(30);
+                textView.setTextColor(Color.BLUE);
+                return textView;
             }
         });
-=======
-        mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-                // ...
-            }
-        };
+        Animation in = AnimationUtils.loadAnimation(this, R.anim.in);
+        Animation out = AnimationUtils.loadAnimation(this, R.anim.out);
 
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
->>>>>>> ccc0e96ff75e7f82509f729568bcf9ca7cd7c3e2
-
-        Animation in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.in);
-        Animation out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.out);
-
-        imageSwitcher.setInAnimation(in);
-        imageSwitcher.setOutAnimation(out);
         textSwitcher.setInAnimation(in);
         textSwitcher.setOutAnimation(out);
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        speechButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Projects post = postSnapshot.getValue(Users.class);
-                    projectList.add(post);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("The read failed: " ,databaseError.getMessage());
+            public void onClick(View v) {
+                Intent chat = new Intent(DashboardLeader.this, ChatScreen.class);
+                startActivity(chat);
             }
         });
 
-<<<<<<< HEAD
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i>0){
-                    i--;
-                   /* imageSwitcher.setImageResource(images[i]); PUT IN IMAGES HERE*/
-                   /*textSwitcher.setText("blaaa"); PUT IN TEXT HERE*/
+                if (i < skillSet.length) {
+                    i++;
+                    textSwitcher.setText(skillSet[i]);
                 }
             }
         });
@@ -154,29 +99,51 @@ public class DashboardLeader extends AppCompatActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i< 10 - 1){ /*PUT NUM OF USERS HERE replace 10*/
+                if (i < users.size()) { /*PUT NUM OF USERS HERE replace 10*/
                     i++;
-                   /* imageSwitcher.setImageResource(images[i]); PUT IN IMAGES HERE*/
-                   /* textSwitcher.setText("blaaa"); PUT IN TEXT HERE*/
+                   textSwitcher.setText(skillSet[i]);
                 }
             }
         });
 
-=======
->>>>>>> ccc0e96ff75e7f82509f729568bcf9ca7cd7c3e2
+        textSwitcher.setText(skillSet[i]);
+
+        //init();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+    private void addUsers() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+        myRef.child("users").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                String[] entries = new String[4];
+                users.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot innerSnap : snapshot.getChildren()) {
+                        entries[i++] = (String) snapshot.getValue();
+                    }
+                    User user = new User(entries[3], entries[1], entries[0], entries[2]);
+                    users.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError e) {
+
+            }
+        });
+
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+    private void init() {
+        addUsers();
+        textSwitcher.setText(users.get(i).getSkills());
     }
+
+
 }
+
+

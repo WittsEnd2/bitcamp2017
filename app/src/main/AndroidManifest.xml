@@ -33,10 +33,6 @@
             android:label="@string/title_activity_project_form"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DashboardUser"
-            android:label="@string/title_activity_dashboard_user"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".DashboardLeader"
             android:label="@string/title_activity_dashboard_leader"
             android:theme="@style/AppTheme.NoActionBar" />

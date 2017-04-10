@@ -13,9 +13,9 @@ public class Projects {
     private String projectName;
     private String projectDescription;
     private int numPeople;
-<<<<<<< HEAD
-=======
+
     private Map<String, Object> usersLiked = new HashMap<>();
+
     public Projects(String leader, String name, String description, int people) {
         projectLeader = leader;
         projectName = name;
@@ -23,16 +23,9 @@ public class Projects {
         numPeople = people;
     }
     public Projects() {
->>>>>>> 3c03f9bed4f4a74df1e7fd9f96de1a615bdbd830
 
-    public Projects(String projectName, String projectDescription, int projectId,
-                    String projectLeader, int numPeople) {
-        this.projectName = projectName;
-        this.projectDescription = projectDescription;
-        this.projectId = projectId;
-        this.projectLeader = projectLeader;
-        this.numPeople = numPeople;
     }
+
     public String getProjectLeader() {
         return projectLeader;
     }

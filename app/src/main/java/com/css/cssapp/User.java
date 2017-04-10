@@ -13,6 +13,7 @@ public class User {
     private String skills;
     private String bio;
     private String type;
+    private Projects project;
 
     public User() {
 
@@ -23,6 +24,15 @@ public class User {
         this.skills = skills;
         this.bio = bio;
         this.type = type;
+        this.project = null;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setProject(Projects project) {
+        this.project = project;
     }
 
     public Map<String, Object> toMap() {
@@ -31,6 +41,7 @@ public class User {
         result.put("skills", skills);
         result.put("bio", bio);
         result.put("type", type);
+        result.put("project", project);
 
         return result;
     }

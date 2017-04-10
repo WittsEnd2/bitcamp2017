@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.google.android.gms.internal.zzs.TAG;
 
 
@@ -25,6 +28,7 @@ public class ProjectForm extends AppCompatActivity {
     EditText projectName, projectDescription, numPeople, projectLeader;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase database;
     private FirebaseUser user;
 
     // Strings or ints that are converted from the EditText values
@@ -94,13 +98,19 @@ public class ProjectForm extends AppCompatActivity {
     }
     protected void projectToDatabase(String name, String description, int numPeople,
                                      String projectLeader) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("projects");
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabase = database.getReference();
+        String key = mDatabase.child("projects").push().getKey();
+        Projects projects = new Projects(projectLeader, name, description, numPeople);
+        Map<String, Object> postValues = projects.toMap();
 
-        myRef.child("user").setValue(user);
-        myRef.child("name").setValue(name);
-        myRef.child("description").setValue(description);
-        myRef.child("numPeople").setValue(numPeople);
-        myRef.child("projectLeader").setValue(projectLeader);
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/projects/" + key, postValues);
+
+        mDatabase.updateChildren(childUpdates);
+
+        // Adding the project to the user
+
+
     }
 }
